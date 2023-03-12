@@ -1,6 +1,5 @@
 package com.fgieracki.Exceptions;
 
-import lombok.AllArgsConstructor;
 
 public class NotFoundException extends Exception{
     String message = "";

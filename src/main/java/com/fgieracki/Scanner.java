@@ -20,23 +20,49 @@ public class Scanner {
     }
 
     public TokenDTO nextToken() throws NotFoundException {
-        if (index >= input.length()) {
+        if(index >= input.length()){
             return null;
         }
-        inputCache+=input.charAt(index);
-        for (Token token : tokens.getTokens()) {
-            if (inputCache.matches(token.getPattern().toString())) {
-                return new TokenDTO(token.name, inputCache, index++);
-            }
+
+        inputCache = "" + input.charAt(index++);
+        if(getMatchingToken(inputCache) == null){
+            throw new NotFoundException("index="
+                    + (index+1-inputCache.length())
+                    + " Value='"
+                    + inputCache + "'");
         }
 
-        inputCache = "" + input.charAt(index);
-        for (Token token : tokens.getTokens()) {
-            if (inputCache.matches(token.getPattern().toString())) {
-                return new TokenDTO(token.name, inputCache, index++);
-            }
+        while(getMatchingToken(inputCache) != null && index < input.length()){
+            inputCache += input.charAt(index++);
         }
-        throw new NotFoundException("Token on a given index: " + index++ + " was not found. (Value: '" + inputCache + "')");
+
+        if(getMatchingToken(inputCache) != null){
+            TokenDTO token = getMatchingToken(inputCache);
+            inputCache = "";
+            return token;
+        }
+
+        else if(getMatchingToken(inputCache.substring(0, inputCache.length()-1)) != null){
+            TokenDTO token = getMatchingToken(inputCache.substring(0, inputCache.length()-1));
+            index--;
+            inputCache = "";
+            return token;
+        }
+
+        else{
+            throw new NotFoundException("Token on a given index: "
+                    + (index-1-inputCache.length())
+                    + " was not found. (Value: '"
+                    + inputCache + "')");
+        }
     }
 
+    private TokenDTO getMatchingToken(String string){
+        for (Token token : tokens.getTokens()) {
+            if (string.matches(token.getPattern().toString())) {
+                return new TokenDTO(token.name, string, index-string.length());
+            }
+        }
+        return null;
+    }
 }

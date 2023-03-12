@@ -25,14 +25,11 @@ public class App {
             try {
                 token = scanner.nextToken();
             } catch (NotFoundException e) {
-//                throw new RuntimeException(e);
                 printString(e.toString());
             }
             if(token == null) continue;
             printString(token.toString());
         }
-
-
     }
 
     private static String readInput() throws IOException {

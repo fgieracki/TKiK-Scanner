@@ -49,5 +49,7 @@ public class TokenDB {
         addToken(new Token(Pattern.compile(","), "COMMA"));
         //assignment
         addToken(new Token(Pattern.compile("="), "ASSIGNMENT"));
+        //variable
+        addToken(new Token(Pattern.compile("[a-zA-Z][a-zA-Z0-9]*"), "VARIABLE"));
     }
 }

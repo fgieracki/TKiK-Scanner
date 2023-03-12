@@ -10,14 +10,14 @@ import lombok.ToString;
 public class TokenDTO {
     String name;
     String value;
-    Integer endIndex;
+    Integer startIndex;
 
     @Override
     public String toString() {
         return "Token{" +
                 "name='" + name + '\'' +
                 ", value='" + value + '\'' +
-                ", endIndex=" + endIndex +
+                ", startIndex=" + startIndex +
                 '}';
     }
 }
