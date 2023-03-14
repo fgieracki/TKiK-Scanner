@@ -17,7 +17,7 @@ public class TokenDTO {
         return "Token{" +
                 "name='" + name + '\'' +
                 ", value='" + value + '\'' +
-                ", startIndex=" + startIndex +
+//                ", startIndex=" + startIndex +
                 '}';
     }
 }

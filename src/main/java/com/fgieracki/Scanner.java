@@ -3,8 +3,8 @@ package com.fgieracki;
 import com.fgieracki.Exceptions.NotFoundException;
 
 public class Scanner {
-    private String input;
-    private TokenDB tokens;
+    private final String input;
+    private final TokenDB tokens;
     private Integer index;
     private String inputCache;
 

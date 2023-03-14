@@ -4,6 +4,8 @@ import com.fgieracki.Exceptions.NotFoundException;
 
 import java.io.*;
 
+import static com.fgieracki.utils.Color.*;
+
 @SuppressWarnings("java:S106") //systemOut SonarLint warning
 public class App {
 
@@ -12,11 +14,11 @@ public class App {
         Scanner scanner;
 
         try{
-            System.out.println("Type string to scan: ");
+            printString("Type string to scan: ");
             input = readInput();
             scanner = new Scanner(input);
         } catch (Exception e) {
-            System.out.println("I/O Error occured. Terminating application");
+            printError("I/O Error occured. Terminating application");
             return;
         }
 
@@ -25,7 +27,7 @@ public class App {
             try {
                 token = scanner.nextToken();
             } catch (NotFoundException e) {
-                printString(e.toString());
+                printError(ANSI_RED + e.toString() + ANSI_RESET);
             }
             if(token == null) continue;
             printString(token.toString());
@@ -38,7 +40,11 @@ public class App {
     }
 
     private static void printString(String string){
-        System.out.println(string);
+        System.out.println(ANSI_CYAN + string + ANSI_RESET);
+    }
+
+    private static void printError(String string){
+        System.out.println(ANSI_RED + string + ANSI_RESET);
     }
 
 
